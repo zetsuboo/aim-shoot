@@ -1,10 +1,11 @@
 #text{
     display:inline-block;
-    background-color: black;
+    background-color: white;
     height: 50px;
     width: 50px;
     border-radius:50px ;
-    position: relative;
+    position: absolute;
+    transition: ease-out;
     
 }
 *{
@@ -16,6 +17,7 @@ body{
     background-color: black;
 }
 #div{
+    position: relative;
     padding: 25px;
     background-color: green;
     margin: 10vh;

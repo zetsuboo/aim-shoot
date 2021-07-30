@@ -2,8 +2,9 @@ const body = document.getElementsByTagName('body')[0];
 const button = document.getElementsByTagName('button')[0];
 const text = document.getElementById('text');
 const scorevue = document.getElementById('score');
+const div = document.getElementById('div');
 const bestscorevue = document.getElementById('bestscore');
-let isClicked = false 
+let isClicked = false
 let score = 0
 let timeout
 if(!localStorage.getItem('bestscore')){
@@ -11,25 +12,32 @@ if(!localStorage.getItem('bestscore')){
 }
 bestScore = parseInt(localStorage.getItem('bestscore'))
 bestscorevue.innerHTML = localStorage.getItem('bestscore')
+ text.addEventListener('click', () =>  {
+     score ++;
+     scorevue.innerHTML = score;
+     let left = parseFloat(Math.floor(Math.random() * 100))
+     let top = parseFloat(Math.floor(Math.random() * 100))
+     text.style.left = left + '%';
+     text.style.top = top + '%';
+     bestscorevue.innerHTML = localStorage.getItem('bestscore')
+     if(score > bestScore){
+         localStorage.setItem('bestscore', score)
+     }
+     if(isClicked === false){
+         isClicked = true
+         timeout = setInterval(() => {
+             FUNC()
+         }, 10000)
+     }
+     })
+    // div.addEventListener('mousemove',(e)=>{
+    //     // console.log(e.x)
+    //     let left =  e.clientY
+    //     let top = e.clientX
+    // text.style.left = left + '%';
+    // text.style.top = top + '%';
 
-text.addEventListener('click', () =>  {
-    score ++;
-    scorevue.innerHTML = score;
-    let left = parseFloat(Math.floor(Math.random() * 100))
-    let top = parseFloat(Math.floor(Math.random() * 100))
-    text.style.left = left + '%';
-    text.style.top = top + '%';
-    bestscorevue.innerHTML = localStorage.getItem('bestscore')
-    if(score > bestScore){
-        localStorage.setItem('bestscore', score)
-    }
-    if(isClicked === false){
-        isClicked = true
-        timeout = setInterval(() => {
-            FUNC()        
-        }, 10000)
-    }
-    })
+    // })
 
 function FUNC(){
 
@@ -42,9 +50,9 @@ function FUNC(){
     }else if (localStorage.getItem('bestscore') - 2 < score) {
         alert ('dommage presque')
     } else if(localStorage.getItem('bestscore') == score) {
-      alert('exaequo')  
+      alert('exaequo')
     } else {
-        
+
         alert('votre score: ' + score  + ', Meilleur score :' + localStorage.getItem('bestscore') )
     }
 
